@@ -1,12 +1,16 @@
 import { SearchPostContainer } from "../styles/SearchPost";
 import { usePosts } from "./../contexts/PostsContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SearchPost() {
-  const { amountPosts } = usePosts();
+  const { amountPosts, getPostsFromRepo } = usePosts();
 
   const [searchTitlePost, setSearchTitlePost] = useState("");
-  
+
+  useEffect(() => {
+    getPostsFromRepo(searchTitlePost);
+  }, [searchTitlePost]);
+
   return (
     <SearchPostContainer>
       <div className="title">

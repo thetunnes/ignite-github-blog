@@ -4,6 +4,17 @@ import { GlobalContainer } from "./global";
 
 export const PostContainer = styled(GlobalContainer)`
   margin-top: -5rem;
+
+  main {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 export const PostTitle = styled(ProfileContainer)`
@@ -47,6 +58,12 @@ export const PostTitle = styled(ProfileContainer)`
       align-items: center;
       gap: 0.5rem;
       color: ${({ theme }) => theme.span};
+    }
+  }
+
+  @media screen and (max-width: 512px) {
+    footer {
+      gap: 1rem;
     }
   }
 `;

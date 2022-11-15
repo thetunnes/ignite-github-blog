@@ -7,8 +7,9 @@ export function formatDate(dateString: string) {
   moment.updateLocale('pt-br', {
     relativeTime: {
       s: '1 segundo',
+      m: '1 minuto',
       d: '1 dia',
-      m: '1 mês',
+      M: '1 mês',
       y: '1 ano'
     }
   })

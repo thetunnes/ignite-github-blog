@@ -4,6 +4,7 @@ import { api } from './../utils/api';
 interface PostsType {
   posts: PostsContextType[]
   amountPosts: number
+  getPostsFromRepo: (text?: string) => void
 }
 
 interface PostsContextType {
@@ -21,15 +22,17 @@ interface ProviderProps {
 }
 
 export function PostsProvider({ children }: ProviderProps) {
+  const repo = 'thetunnes/my-blog'
   const [posts, setPosts] = useState([])
-  const [amountPosts, setamountPosts] = useState(0)
+  const [amountPosts, setAmountPosts] = useState(0)
 
-  async function getPostsFromRepo() {
-
-    const response = await api.get('/search/issues?q=repo:thetunnes/my-blog')
+  async function getPostsFromRepo(text = '') {
+    console.log(text)
+    const response = await api.get(`/search/issues?q=${text}repo:${repo}`)
+    console.log(response)
     const { data } = response
     setPosts(data.items)
-    setamountPosts(data.total_count)
+    setAmountPosts(data.total_count ?? 0)
     
   } 
 
@@ -37,7 +40,7 @@ export function PostsProvider({ children }: ProviderProps) {
     getPostsFromRepo()
   }, [])
   return (
-    <PostsContext.Provider value={{ posts, amountPosts }}>
+    <PostsContext.Provider value={{ posts, amountPosts, getPostsFromRepo }}>
       {children}
     </PostsContext.Provider>
   )

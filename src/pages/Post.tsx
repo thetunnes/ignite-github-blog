@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import ReactMarkdown from 'react-markdown';
 
 import { api } from "./../utils/api";
 
@@ -48,6 +49,8 @@ export function Post() {
     fetchDataPost(numberPost);
   }, []);
 
+  console.log(dataPost)
+
   // if (dataPost) {
   return (
     <PostContainer>
@@ -76,6 +79,10 @@ export function Post() {
           </span>
         </footer>
       </PostTitle>
+
+      <main>
+      <ReactMarkdown children={dataPost.body} />
+      </main>
     </PostContainer>
   );
 }
